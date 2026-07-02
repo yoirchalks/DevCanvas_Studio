@@ -1,0 +1,18 @@
+<section class="innovation" id="innovation">
+  <div class="innovation-inner">
+    <h2>Real problems, thought through</h2>
+    <p class="section-lede">
+      A few of the problems clients bring me &mdash; and how I actually solve them.
+    </p>
+
+    <div class="cards">
+      @for (item of featured(); track item.tag) {
+        <article class="card">
+          <span class="tag">{{ item.tag }}</span>
+          <p class="problem">{{ item.problem }}</p>
+          <p class="solution">{{ item.solution }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
