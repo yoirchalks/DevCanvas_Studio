@@ -1,0 +1,77 @@
+<div class="demo search-demo">
+  <h3>Search &amp; add</h3>
+
+  <div class="columns">
+    <div class="column">
+      <pre class="code-block" aria-label="Editable debounce delay">
+<span class="lang">javascript</span>
+
+<span class="tok kw">function</span> <span class="tok fn">debounce</span>(fn, ms = <input
+    class="code-input code-input-number"
+    type="number"
+    min="0"
+    max="2000"
+    step="50"
+    [value]="delayMs()"
+    (input)="onDelayInput($event)"
+    aria-label="Debounce delay in milliseconds"
+  />) &#123;
+  <span class="tok kw">let</span> t;
+  <span class="tok kw">return</span> (...args) => &#123;
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), ms);
+  &#125;;
+&#125;</pre>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search services…"
+        [value]="query()"
+        (input)="onQueryInput($event)"
+        aria-label="Search services"
+      />
+    </div>
+
+    <div class="column">
+      <form class="insert-form" (submit)="onInsert($event)">
+        <pre class="code-block" aria-label="Editable SQL insert statement">
+<span class="lang">sql</span>
+
+<span class="tok kw">INSERT INTO</span> services (title, description)
+<span class="tok kw">VALUES</span> (<input
+    class="code-input code-input-text"
+    type="text"
+    placeholder="Your title here"
+    [value]="newTitle()"
+    (input)="onNewTitleInput($event)"
+    aria-label="New skill title"
+  />, <input
+    class="code-input code-input-text"
+    type="text"
+    placeholder="Your description here"
+    [value]="newDescription()"
+    (input)="onNewDescriptionInput($event)"
+    aria-label="New skill description"
+  />);</pre>
+        <button type="submit">Press Enter to add</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="results-header">
+    <span class="results-label">Results</span>
+    <button type="button" class="refresh" (click)="onRefresh()">↻ Refresh</button>
+  </div>
+
+  <ul class="results">
+    @for (item of results(); track item.title) {
+      <li>
+        <strong>{{ item.title }}</strong>
+        <span>{{ item.description }}</span>
+      </li>
+    } @empty {
+      <li class="empty">No matches</li>
+    }
+  </ul>
+</div>

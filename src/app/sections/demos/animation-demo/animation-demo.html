@@ -1,0 +1,56 @@
+<div class="demo animation-demo">
+  <h3>CSS animation</h3>
+  <pre class="code-block" aria-label="Editable CSS animation code">
+<span class="lang">css</span>
+
+<span class="tok kw">@keyframes</span> <span class="tok fn">spin</span> &#123;
+  <span class="tok prop">from</span> &#123; <span class="tok prop">transform</span>: rotate(<input
+    class="code-input code-input-number"
+    type="number"
+    step="1"
+    min="-3600"
+    max="3600"
+    [value]="fromDeg()"
+    (input)="onFromDegInput($event)"
+    aria-label="Animation start angle in degrees"
+  />deg); &#125;
+  <span class="tok prop">to</span>   &#123; <span class="tok prop">transform</span>: rotate(<input
+    class="code-input code-input-number"
+    type="number"
+    step="1"
+    min="-3600"
+    max="3600"
+    [value]="toDeg()"
+    (input)="onToDegInput($event)"
+    aria-label="Animation end angle in degrees"
+  />deg); &#125;
+&#125;
+
+.box &#123;
+  <span class="tok prop">animation</span>: <span class="tok fn">spin</span> <input
+    class="code-input code-input-number"
+    type="number"
+    step="0.1"
+    min="0.1"
+    max="10"
+    [value]="duration()"
+    (input)="onDurationInput($event)"
+    aria-label="Animation duration in seconds"
+  />s <select
+    class="code-input code-input-select"
+    [value]="easing()"
+    (change)="onEasingChange($event)"
+    aria-label="Animation timing function"
+  >@for (option of easingOptions; track option) {<option [value]="option">{{ option }}</option>}</select> infinite;
+&#125;</pre>
+
+  <div class="preview">
+    <div
+      class="box"
+      [style.animation-duration.s]="duration()"
+      [style.animation-timing-function]="easing()"
+      [style.--from-deg]="fromDeg() + 'deg'"
+      [style.--to-deg]="toDeg() + 'deg'"
+    ></div>
+  </div>
+</div>
